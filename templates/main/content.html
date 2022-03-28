@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Note Content{% endblock %}
+
+{% block content %}
+ <div class="form-group">
+  <form method="post">
+   {% csrf_token %}
+   {% load crispy_forms_tags %}
+   {{form|crispy}}
+   <br>
+   <button class="btn btn-success" type="submit">Save</button>
+   <a class="btn btn-danger" type="button" href="{% url 'notes:detail' note.id %}">Back</a>
+  </form>
+ </div>
+{% endblock %}

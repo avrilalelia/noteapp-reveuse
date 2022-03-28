@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Reveuse|Edit Note List Title{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<h1>Edit Note List Title</h1>
+<form method="post">
+ {% csrf_token %}
+ {{form|crispy}}
+ <br>
+ <button class="btn btn-primary" type="submit" name="save">Save</button>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail Page{% endblock %}
+
+{% block content %}
+ <h1>{{note.note_title}}</h1>
+ <a href="{% url 'notes:create_content' note_id=note.id %}" style="float: right; margin-left: 5px;"
+  class="btn btn-sm btn-primary">Create</a>
+ <a href="{% url 'notes:notes' %}" class="btn btn-sm btn-danger" style="float: right;">Back</a>
+ <br>
+ <br>
+ {% if note.content_set.count is 0 %}
+  <p class="text-center">There are no notes in this list.</p>
+ {% endif %}
+ {% if note.content_set.all %}
+  {% for content in note.content_set.all %}
+   <div class="card">
+    <div class="card-body">
+     <a class="card-text" href="{% url 'notes:content' note_id=note.id content_id=content.id %}" style="text-decoration: none; color: black; white-space: pre-line">{{content.note_text}}
+      <p style="font-size: small;">
+       Tags: {{content.tags}}
+       Date Published: {{content.date_pub}}
+      </p>
+     </a>
+     <a href="{% url 'notes:delete' note_id=note.id content_id=content.id %}" style="float: right;" class="btn btn-sm btn-secondary">Delete</a>
+    </div>
+   </div>
+   <br>
+  {% endfor %}
+ {% endif %}
+{% endblock %}
